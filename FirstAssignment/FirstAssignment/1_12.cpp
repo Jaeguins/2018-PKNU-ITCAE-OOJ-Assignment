@@ -1,96 +1,47 @@
 #include <iostream>
-
-template<class TreeContainer>
+template<class TreeData>
 class TreeNode {
 private:
-    TreeContainer data;
-    TreeNode<TreeContainer>*parent, *left, *right;
+    float standard;
+    TreeData data;
+    TreeNode<TreeData>*left, *right;
 public:
-    TreeNode(TreeContainer value) {
-        data = value;
-    };
-    
-    TreeContainer getData() {
-        return data;
-    };
-    
+    TreeNode(float standard, TreeData value) { this->standard = standard; data = value; };
+    TreeData getData() {return data;};
     void print() {
-        if (left != NULL) {
-            left->print();
-        }
-        std::cout << data;
-        if (right != NULL) {
-            right->print();
-        }
+		if (left != NULL) left->print();
+        std::cout << data<<" ";
+        if (right != NULL) right->print();
     }
-
-    TreeNode<TreeContainer>* getParent() {
-        return parent;
-    };
-    
-    TreeNode<TreeContainer>** getLeft() {
-        return& left;
-    };
-    
-    TreeNode<TreeContainer>** getRight() {
-        return &right;
-    };
-
-    void setParent(TreeNode<TreeContainer>* addr) {
-        parent = addr;
-    };
-
-    void setLeft(TreeNode<TreeContainer>* addr) {
-        left = addr;
-    };
-
-    void setRight(TreeNode<TreeContainer>* addr) {
-        right = addr;
-    };
-
+	float getStandard() {return standard;};
+    TreeNode<TreeData>** getLeft() {return& left;};
+    TreeNode<TreeData>** getRight() {return &right;};
+    void setStandard(float standard) {this->standard=standard;};
+    void setLeft(TreeNode<TreeData>* addr) {left = addr;};
+    void setRight(TreeNode<TreeData>* addr) {right = addr;};
 };
-
-template<class TreeContainer>
+template<class TreeData>
 class Tree {
-
 private:
-    TreeNode<TreeContainer> *root;
-
+    TreeNode<TreeData> *root;
 public:
-    Tree<TreeContainer>() {};
-    
-    void add(TreeContainer value) {
-        TreeNode<TreeContainer> *tContainer = new TreeNode<TreeContainer>(value);
-        TreeNode<TreeContainer> **pointer = &root;
-        TreeNode<TreeContainer> *tParent=NULL;
+    Tree<TreeData>() {};
+    void add(float standard,TreeData value) {
+        TreeNode<TreeData> *tContainer = new TreeNode<TreeData>(standard,value);
+        TreeNode<TreeData> **pointer = &root;
         while (1) {
-            if (*pointer == NULL) {
-                *pointer = tContainer;
-                tContainer->setParent(tParent);
-                return;
-            }
-            else if ((*pointer)->getData() > tContainer->getData()) {
-                tParent = *pointer;
-                pointer = (*pointer)->getLeft();
-            }
-            else {
-                tParent = *pointer;
-                pointer =(*pointer)->getRight();
-            }
+            if (*pointer == NULL) { *pointer = tContainer; return; }
+            else pointer = ((*pointer)->getStandard() > tContainer->getStandard()) ? (*pointer)->getLeft() : (*pointer)->getRight();
         }
     };
-    
-    void print() {
-        root->print();
-    };
+    void print() {root->print();};
 };
-
 void main() {
-    Tree<int> tree;
+    Tree<float> tree;
     for (int i = 0; i < 5; i++) {
-        int input;
+        float input;
         std::cin >> input;
-        tree.add(input);
+        tree.add(input,input);
     }
     tree.print();
     getchar();

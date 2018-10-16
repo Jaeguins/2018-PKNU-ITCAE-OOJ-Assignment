@@ -9,7 +9,7 @@ public:
     char* getName();
     int getNumber();
     int getAge();
-    void setName(char*name);
+    void setName(char name[20]);
     void setNumber(int number);
     void setAge(int age);
 };

@@ -7,7 +7,7 @@ int main() {
     while (1) {
         int num = 0;
         int inputs[5];
-        cout << "input number of numbers XD" << endl;
+        cout << "input number of numbers" << endl;
         cin >> num;
         if (num > 5)num = 5;
         if (num < 0)num = 0;

@@ -1,12 +1,8 @@
 #include <iostream>
 class AreaGet {
 public:
-    static float GetArea(float width, float height) {
-        return width * height;
-    }
-    static float GetArea(float caliber) {
-        return 0.5f*caliber*caliber;
-    }
+    static float GetArea(float width, float height) {return width * height;}
+    static float GetArea(float caliber) {return 0.5f*caliber*caliber;}
 };
 int main() {
     while (1) {

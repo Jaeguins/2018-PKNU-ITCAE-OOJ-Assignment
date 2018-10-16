@@ -23,4 +23,7 @@ void main() {
     swap<int>(&a, &b);
     swap<Rectangle>(&c, &d);
     std::cout << a << " " << c.width << " " << c.height<<std::endl;
+    getchar();
+    getchar();
+
 }
